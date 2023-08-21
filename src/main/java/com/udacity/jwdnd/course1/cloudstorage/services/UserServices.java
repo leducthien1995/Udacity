@@ -3,13 +3,12 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 import com.udacity.jwdnd.course1.cloudstorage.common.Common;
 import com.udacity.jwdnd.course1.cloudstorage.entity.Users;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UserMapper;
-import com.udacity.jwdnd.course1.cloudstorage.services.imp.UserImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
-public class UserServices implements UserImp {
+public class UserServices {
 
 	@Autowired
 	private UserMapper userMapper;
@@ -17,12 +16,10 @@ public class UserServices implements UserImp {
 	@Autowired
 	private HashService hashService;
 
-	@Override
 	public Users getByUsername(String username) {
 		return userMapper.getUserInfo(username);
 	}
 
-	@Override
 	public int addUsers(Users users) {
 		String encodeSaltbase64 = Common.ramdomEncodeBase64();
 		String passHashed = hashService.getHashedValue(users.getPassword(), encodeSaltbase64);
@@ -30,7 +27,6 @@ public class UserServices implements UserImp {
 				users.getFirstName(), users.getLastName()));
 	}
 
-	@Override
 	public String validationRegistUser(String username) {
 		String errorMessage = "";
 		if (StringUtils.isEmpty(username)) {

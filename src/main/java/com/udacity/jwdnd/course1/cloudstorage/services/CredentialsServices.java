@@ -3,14 +3,13 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 import com.udacity.jwdnd.course1.cloudstorage.common.Common;
 import com.udacity.jwdnd.course1.cloudstorage.entity.Credentials;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.CredentialsMapper;
-import com.udacity.jwdnd.course1.cloudstorage.services.imp.CredentialsImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CredentialsServices implements CredentialsImp {
+public class CredentialsServices {
 
 	@Autowired
 	private CredentialsMapper credentialsMapper;
@@ -18,12 +17,10 @@ public class CredentialsServices implements CredentialsImp {
 	@Autowired
 	private EncryptionService encryptionService;
 
-	@Override
 	public List<Credentials> getAllListCredentials(Integer userId) {
 		return credentialsMapper.getAllListCredentials(userId);
 	}
 
-	@Override
 	public int isExistCredentialById(Integer creId, Integer userId) {
 		return credentialsMapper.isExistCredentialById(creId, userId);
 	}
@@ -32,18 +29,15 @@ public class CredentialsServices implements CredentialsImp {
 		return credentialsMapper.getCreById(creId, userId);
 	}
 
-	@Override
 	public boolean addCredentials(Credentials credential) {
 		encryptPassword(credential);
 		return credentialsMapper.addCredentials(credential);
 	}
 
-	@Override
 	public boolean deleteCreById(Integer creId, Integer userId) {
 		return credentialsMapper.deleteCreById(creId, userId);
 	}
 
-	@Override
 	public boolean editCreById(Credentials credential) {
 		encryptPassword(credential);
 		return credentialsMapper.editCreById(credential);
