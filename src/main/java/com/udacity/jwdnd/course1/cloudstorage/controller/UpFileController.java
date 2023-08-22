@@ -46,7 +46,7 @@ public class UpFileController {
 		}
 
 		if (!errorFilesUpload.isBlank()) {
-			modal.addAttribute("errorSaveFiles", errorFilesUpload);
+			modal.addAttribute("resultNG", errorFilesUpload);
 			return "result";
 		}
 

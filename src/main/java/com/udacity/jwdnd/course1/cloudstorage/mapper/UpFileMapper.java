@@ -14,7 +14,7 @@ public interface UpFileMapper {
     @Select("SELECT * FROM FILES WHERE userid = #{userId}")
     List<UpFile> findAllFiles(Integer userId);
 
-    @Select("SELECT 1 FROM FILES WHERE filename = #{fileName} AND userid = #{userId}")
+    @Select("SELECT COUNT(1) FROM FILES WHERE filename = #{fileName} AND userid = #{userId}")
     int isFileExist(String fileName, Integer userId);
 
     @Select("SELECT * FROM FILES WHERE fileId = #{fileId} AND userid = #{userId}")
